@@ -5,7 +5,7 @@ import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.command.argument.MessageArgumentType;
 import net.minecraft.server.MinecraftServer;
@@ -33,7 +33,7 @@ public class Main implements ModInitializer {
             startTime = System.currentTimeMillis();
         });
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> {
             cfg.mappings.forEach((s, s2) -> {
                 dispatcher.getRoot().addChild(
                         CommandManager.literal(s)
